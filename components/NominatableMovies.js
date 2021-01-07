@@ -13,11 +13,7 @@ const sortFunctions = {
   },
 }
 
-export default function NominatableMovies({
-  movies,
-  onNominateMovie,
-  nominations,
-}) {
+export default function NominatableMovies({ movies, onNominateMovie }) {
   const [sortedMovies, setSortedMovies] = useState(movies)
   const [sortParam, setSortParam] = useState('Year')
   const [sortDirection, setSortDirection] = useState('desc')
@@ -44,7 +40,7 @@ export default function NominatableMovies({
 
   return (
     <>
-      <div className="mb-4 text-xs">
+      <div className="mb-4 text-xs px-4">
         Sort movies by{' '}
         <span
           className="font-bold hover:text-brand-red hover:cursor-pointer"
@@ -60,16 +56,13 @@ export default function NominatableMovies({
         </span>
       </div>
 
-      <div className="space-y-4">
-        {sortedMovies.map((movie) => (
-          <NominatableMovie
-            key={movie.imdbID}
-            movie={movie}
-            nominations={nominations}
-            onNominateMovie={onNominateMovie}
-          />
-        ))}
-      </div>
+      {sortedMovies.map((movie) => (
+        <NominatableMovie
+          key={movie.imdbID}
+          movie={movie}
+          onNominateMovie={onNominateMovie}
+        />
+      ))}
     </>
   )
 }

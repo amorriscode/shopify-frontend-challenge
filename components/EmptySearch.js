@@ -3,7 +3,7 @@ export default function EmptySearch({ light }) {
 
   return (
     <>
-      <div className="text-6xl mb-4 animate-bounce">☝️</div>
+      <div className="text-6xl mt-12 mb-4 animate-bounce">☝️</div>
 
       <h2 className={`text-xl font-bold ${colorCSS}`}>
         Search for your favourite movies!

@@ -1,8 +1,6 @@
 import { useQuery } from 'react-query'
 
-import Container from './Container'
 import NominatableMovies from './NominatableMovies'
-import LoadingMovieCard from './LoadingMovieCard'
 
 export default function SearchResults({
   searchQuery,
@@ -13,61 +11,48 @@ export default function SearchResults({
     fetch(`/api/search?query=${searchQuery}`).then((res) => res.json())
   )
 
-  // Show our loading state
-  if (isLoading)
+  // Don't render anything if we are loading
+  if ((isLoading && !data?.length) || searchQuery.length <= 3)
     return (
-      <Container>
-        <h2 className="text-xl font-bold text-gray-800 mb-4">
-          Taking a look for some movies...
+      <>
+        <h2 className="text-xl font-bold text-gray-800 px-4 mb-2">
+          Give us a moment while we look for "{searchQuery}"...
         </h2>
-
-        <div className="space-y-4">
-          {[1, 2].map((i) => (
-            <LoadingMovieCard key={i} />
-          ))}
-        </div>
-      </Container>
+      </>
     )
 
   // Handle our error state
   if (data?.error)
     return (
-      <Container>
-        <h2 className="text-xl font-bold text-gray-800 mb-4">
+      <>
+        <h2 className="text-xl font-bold text-gray-800 px-4">
           Whoops, something went wrong!
         </h2>
 
-        <div>{data.error}</div>
-      </Container>
+        <p className="text-sm p-4">Try another search, on the house.</p>
+      </>
     )
 
   // We made it! Show results
   return (
-    <Container>
+    <>
+      <h2 className="text-xl font-bold text-gray-800 px-4 mb-2">
+        {data.length ? (
+          <>Here's what we found for "{searchQuery}"...</>
+        ) : (
+          <>We couldn't find anything for "{searchQuery}".</>
+        )}
+      </h2>
+
       {data.length ? (
-        <>
-          <h2 className="text-xl font-bold text-gray-800 mb-4">
-            Here's what we found for "{searchQuery}"...
-          </h2>
-
-          <NominatableMovies
-            movies={data}
-            onNominateMovie={onNominateMovie}
-            nominations={nominations}
-          />
-        </>
+        <NominatableMovies
+          movies={data}
+          onNominateMovie={onNominateMovie}
+          nominations={nominations}
+        />
       ) : (
-        <>
-          <h2 className="text-xl font-bold text-gray-800 mb-4">
-            We couldn't find anything for "{searchQuery}".
-          </h2>
-
-          <img
-            className="rounded"
-            src="https://media.giphy.com/media/3o6wrebnKWmvx4ZBio/giphy.gif"
-          />
-        </>
+        <p className="text-sm p-4">Try another search, on the house.</p>
       )}
-    </Container>
+    </>
   )
 }

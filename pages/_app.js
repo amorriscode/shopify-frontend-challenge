@@ -1,13 +1,17 @@
 import { QueryClient, QueryClientProvider } from 'react-query'
 
-const queryClient = new QueryClient()
+import { NominationsProvider } from '../context/NominationsContext'
 
 import '../styles/globals.css'
+
+const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
+      <NominationsProvider>
+        <Component {...pageProps} />
+      </NominationsProvider>
     </QueryClientProvider>
   )
 }
