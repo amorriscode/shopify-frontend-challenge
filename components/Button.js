@@ -14,7 +14,7 @@ export default function Button({
 
   return (
     <button
-      className={`border-2 border-brand-red hover:border-brand-red-dark py-1 px-2 rounded ${primaryCSS} ${disabledCSS}`}
+      className={`border-2 border-brand-red hover:border-brand-red-dark py-1 px-2 rounded transition duration-300 ease-in-out ${primaryCSS} ${disabledCSS}`}
       onClick={onClick}
       disabled={disabled}
     >

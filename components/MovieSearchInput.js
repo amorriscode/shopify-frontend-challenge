@@ -15,8 +15,9 @@ export default function MovieSearchInput({ onSearchQueryChange }) {
       </label>
 
       <input
+        id="search"
         name="search"
-        className="w-full rounded pl-14 p-4 focus:ring-4 focus:ring-brand-red text-4xl font-bold"
+        className="w-full rounded pl-14 p-4 focus:ring-4 focus:ring-brand-red text-4xl font-bold transition duration-150 ease-in-out"
         placeholder="Search for a movie..."
         onChange={(event) => debouncedQueryHandler(event.target.value)}
       />
