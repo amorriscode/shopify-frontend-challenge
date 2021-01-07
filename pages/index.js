@@ -23,12 +23,10 @@ export default function Home() {
   // Load nominations from local storage if they exist
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const storedNominations = JSON.parse(
-        localStorage.getItem('nominations') || []
-      )
+      const storedNominations = localStorage.getItem('nominations') || []
 
       if (storedNominations.length) {
-        setNomintations(storedNominations)
+        setNomintations(JSON.parse(storedNominations))
         setDisplayResults(true)
       }
     }
