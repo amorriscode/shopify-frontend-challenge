@@ -59,7 +59,7 @@ export default function SearchResults() {
           in={displayResults}
           timeout={{
             appear: 0,
-            enter: 100,
+            enter: 500,
             exit: 100,
           }}
         >
