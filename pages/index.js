@@ -41,7 +41,7 @@ export default function Home() {
     if (searchQuery !== newSearchQuery) {
       setSearchQuery(newSearchQuery)
     }
-    console.log(searchQuery, displayResults)
+
     // If we haven't show the results and our query is long enough
     // then we will display the result/nominations containers
     if (newSearchQuery.length > 3 && !displayResults) {
