@@ -19,7 +19,7 @@ export default function NominatedMovie({
   const action = isNominated ? (
     <div className="text-sm text-gray-600">Nominated!</div>
   ) : (
-    <Button onClick={nominateMovie} primary disabled={nominations.length > 5}>
+    <Button onClick={nominateMovie} primary disabled={nominations.length >= 5}>
       Nominate
     </Button>
   )
