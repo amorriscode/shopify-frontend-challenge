@@ -5,6 +5,7 @@ export default async (req, res) => {
   if (!query || query.length < 3) {
     res.statusCode = 200
     res.json([])
+    return
   }
 
   const searchResults = await fetch(

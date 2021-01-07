@@ -2,7 +2,6 @@ import { useQuery } from 'react-query'
 
 import Container from './Container'
 import NominatableMovies from './NominatableMovies'
-import EmptySearch from './EmptySearch'
 import LoadingMovieCard from './LoadingMovieCard'
 
 export default function SearchResults({
@@ -13,14 +12,6 @@ export default function SearchResults({
   const { isLoading, data } = useQuery(`query-${searchQuery}`, () =>
     fetch(`/api/search?query=${searchQuery}`).then((res) => res.json())
   )
-
-  // Encourage a new query if it is too show
-  if (searchQuery.length < 3)
-    return (
-      <Container>
-        <EmptySearch />
-      </Container>
-    )
 
   // Show our loading state
   if (isLoading)

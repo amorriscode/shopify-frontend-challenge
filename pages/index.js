@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { Transition } from 'react-transition-group'
 
 import MovieSearchInput from '../components/MovieSearchInput'
-import MovieSearchResults from '../components/MovieSearchResults'
+import MovieSearch from '../components/MovieSearch'
 import Nominations from '../components/Nominations'
 import ThankYouBanner from '../components/ThankYouBanner'
 import EmptySearch from '../components/EmptySearch'
@@ -102,7 +102,7 @@ export default function Home() {
                 ...transitionStyles[state],
               }}
             >
-              <MovieSearchResults
+              <MovieSearch
                 searchQuery={searchQuery}
                 nominations={nominations}
                 onNominateMovie={handleNominateMovie}
