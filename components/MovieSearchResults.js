@@ -1,8 +1,6 @@
 import { useQuery } from 'react-query'
 
-import Container from './Container'
 import NominatableMovies from './NominatableMovies'
-import LoadingMovieCard from './LoadingMovieCard'
 
 export default function SearchResults({
   searchQuery,
@@ -13,40 +11,27 @@ export default function SearchResults({
     fetch(`/api/search?query=${searchQuery}`).then((res) => res.json())
   )
 
-  // Show our loading state
-  if (isLoading)
-    return (
-      <Container>
-        <h2 className="text-xl font-bold text-gray-800 mb-4">
-          Taking a look for some movies...
-        </h2>
-
-        <div className="space-y-4">
-          {[1, 2].map((i) => (
-            <LoadingMovieCard key={i} />
-          ))}
-        </div>
-      </Container>
-    )
+  // Don't render anything if we are loading
+  if ((isLoading && !data?.length) || searchQuery.length <= 3) return <></>
 
   // Handle our error state
   if (data?.error)
     return (
-      <Container>
-        <h2 className="text-xl font-bold text-gray-800 mb-4">
+      <>
+        <h2 className="text-xl font-bold text-gray-800 px-4">
           Whoops, something went wrong!
         </h2>
 
-        <div>{data.error}</div>
-      </Container>
+        <p className="text-sm p-4">Try another search, on the house.</p>
+      </>
     )
 
   // We made it! Show results
   return (
-    <Container>
+    <>
       {data.length ? (
         <>
-          <h2 className="text-xl font-bold text-gray-800 mb-4">
+          <h2 className="text-xl font-bold text-gray-800 px-4 mb-2">
             Here's what we found for "{searchQuery}"...
           </h2>
 
@@ -58,16 +43,13 @@ export default function SearchResults({
         </>
       ) : (
         <>
-          <h2 className="text-xl font-bold text-gray-800 mb-4">
+          <h2 className="text-xl font-bold text-gray-800 px-4">
             We couldn't find anything for "{searchQuery}".
           </h2>
 
-          <img
-            className="rounded"
-            src="https://media.giphy.com/media/3o6wrebnKWmvx4ZBio/giphy.gif"
-          />
+          <p className="text-sm p-4">Try another search, on the house.</p>
         </>
       )}
-    </Container>
+    </>
   )
 }

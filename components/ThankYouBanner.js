@@ -41,16 +41,16 @@ export default function ThankYouBanner() {
     }, 450)
 
     return () => clearInterval(interval)
-  })
+  }, [])
 
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-4 lg:gap-4">
       <img
         className="rounded col-span-1 w-full"
         src="https://media.giphy.com/media/4JXNjv3MR21YXfsaqQ/giphy.gif"
       />
 
-      <div className="bg-brand-red p-8 rounded text-white text-2xl w-full col-span-2 flex flex-col justify-center items-center space-y-4">
+      <div className="bg-brand-red p-8 rounded text-white text-2xl w-full col-span-2 flex flex-col justify-center items-center space-y-4 text-center">
         <p>Thanks for nominating your favourite films!</p>
 
         <p>Check back soon to find out who won!</p>

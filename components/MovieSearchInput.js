@@ -1,8 +1,22 @@
+import { useState, useEffect } from 'react'
 import { FiSearch } from 'react-icons/fi'
 
 import debounce from '../lib/debounce'
 
-export default function MovieSearchInput({ onSearchQueryChange }) {
+export default function MovieSearchInput({
+  searchQuery,
+  onSearchQueryChange,
+  onFocusChange,
+  isFocused,
+}) {
+  const [value, setValue] = useState('')
+
+  useEffect(() => {
+    if (!searchQuery) {
+      setValue('')
+    }
+  }, [searchQuery])
+
   // Limit the frequency of API calls
   const debouncedQueryHandler = debounce(onSearchQueryChange, 500, false)
 
@@ -17,9 +31,17 @@ export default function MovieSearchInput({ onSearchQueryChange }) {
       <input
         id="search"
         name="search"
-        className="w-full rounded pl-14 p-4 focus:ring-4 focus:ring-brand-red text-4xl font-bold transition duration-150 ease-in-out"
+        value={value}
+        className={`w-full rounded pl-14 p-4 text-4xl font-bold transition duration-150 ease-in-out ring-4 ${
+          isFocused ? 'ring-brand-red' : 'ring-white'
+        }`}
         placeholder="Search for a movie..."
-        onChange={(event) => debouncedQueryHandler(event.target.value)}
+        onChange={(event) => {
+          setValue(event.target.value)
+          debouncedQueryHandler(event.target.value)
+        }}
+        onFocus={() => onFocusChange(true)}
+        onBlur={() => onFocusChange(false)}
       />
     </form>
   )
