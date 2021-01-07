@@ -21,6 +21,9 @@ export default async (req, res) => {
     res.json({ error: searchResults.Error })
   } else {
     // If no movies were found, send an empty array
-    res.json(searchResults.Search || [])
+    const movies = searchResults.Search || []
+    movies.sort((movieA, movieB) => movieB.Year - movieA.Year)
+
+    res.json(movies)
   }
 }
