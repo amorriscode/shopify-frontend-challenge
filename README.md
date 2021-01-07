@@ -1,6 +1,6 @@
 # 2021 Shopify Front-end Challenge
 
-![Demo of my Shopify front-end challenge](https://user-images.githubusercontent.com/16005567/103852261-623a4300-5060-11eb-8825-512eec77f5ad.gif)
+![Demo of my Shopify front-end challenge](https://user-images.githubusercontent.com/16005567/103949338-f69fb680-50ef-11eb-96f3-62d7443794e8.gif)
 
 ## Features
 
