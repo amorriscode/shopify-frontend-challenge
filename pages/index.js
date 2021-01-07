@@ -1,63 +1,130 @@
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { Transition } from 'react-transition-group'
+
+import MovieSearchInput from '../components/MovieSearchInput'
+import MovieSearchResults from '../components/MovieSearchResults'
+import Nominations from '../components/Nominations'
+import ThankYouBanner from '../components/ThankYouBanner'
+import EmptySearch from '../components/EmptySearch'
+
+const transitionStyles = {
+  entering: { opacity: 1 },
+  entered: { opacity: 1 },
+  exiting: { opacity: 0 },
+  exited: { opacity: 0 },
+}
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState('')
+  const [displayResults, setDisplayResults] = useState(false)
+  const [nominations, setNomintations] = useState([])
+
+  // Load nominations from local storage if they exist
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedNominations = JSON.parse(
+        localStorage.getItem('nominations') || []
+      )
+
+      if (storedNominations.length) {
+        setNomintations(storedNominations)
+        setDisplayResults(true)
+      }
+    }
+  }, [])
+
+  const storeNominations = (nominations) =>
+    localStorage.setItem('nominations', JSON.stringify(nominations))
+
+  const handleSearchQuery = (newSearchQuery) => {
+    if (searchQuery !== newSearchQuery) {
+      setSearchQuery(newSearchQuery)
+    }
+    console.log(searchQuery, displayResults)
+    // If we haven't show the results and our query is long enough
+    // then we will display the result/nominations containers
+    if (newSearchQuery.length > 3 && !displayResults) {
+      setDisplayResults(true)
+    }
+  }
+
+  const handleNominateMovie = (movie) => {
+    const newNominations = [...nominations, movie]
+    storeNominations(newNominations)
+    setNomintations(newNominations)
+  }
+
+  const handleRemoveNomination = (movie) => {
+    const newNominations = nominations.filter(
+      (nomination) => nomination.imdbID !== movie.imdbID
+    )
+
+    storeNominations(newNominations)
+    setNomintations(newNominations)
+  }
+
   return (
-    <div className={styles.container}>
+    <div className="min-h-screen flex flex-col justify-between">
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>The Shoppies</title>
+        <link
+          rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍿</text></svg>"
+        />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+      <main className="container mx-auto space-y-8 p-8">
+        <h1 className="text-brand-red text-6xl font-bold text-center">
+          The Shoppies 🍿
         </h1>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+        <h2 className="text-white text-2xl font-bold text-center">
+          Nominate your favourite movies!
+        </h2>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+        <MovieSearchInput onSearchQueryChange={handleSearchQuery} />
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+        {nominations.length >= 5 && <ThankYouBanner />}
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+        {!displayResults && (
+          <section className="text-center">
+            <EmptySearch light />
+          </section>
+        )}
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        <Transition in={displayResults} timeout={500}>
+          {(state) => (
+            <section
+              className="grid lg:grid-cols-2 gap-8 transition-opacity ease-in duration-700"
+              style={{
+                opacity: 0,
+                ...transitionStyles[state],
+              }}
+            >
+              <MovieSearchResults
+                searchQuery={searchQuery}
+                nominations={nominations}
+                onNominateMovie={handleNominateMovie}
+              />
+
+              <Nominations
+                nominations={nominations}
+                onRemoveNomination={handleRemoveNomination}
+              />
+            </section>
+          )}
+        </Transition>
       </main>
 
-      <footer className={styles.footer}>
+      <footer className="text-center text-white pt-0 p-8">
+        Made with 🍿 by{' '}
         <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
-          rel="noopener noreferrer"
+          className="text-brand-red hover:text-brand-red-dark font-bold"
+          href="https://anthonymorris.dev"
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+          Anthony Morris
         </a>
       </footer>
     </div>

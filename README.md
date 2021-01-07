@@ -1,34 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 2021 Shopify Front-end Challenge
 
-## Getting Started
+![Demo of my Shopify front-end challenge](https://user-images.githubusercontent.com/16005567/103851416-99a7f000-505e-11eb-908f-1411701f4e4b.gif)
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- Search OMDB for your favourite movies
+- Sorting search results
+- Add movies to your nominations list (stored in local storage)
+- Loading and empty states (including some gifs)
+- Dynamic banner to hype you up for the Shoppies
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Get It Running
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+1. `git clone` to your favourite working directory
+2. `yarn` to create a large folder of `node_modules`
+3. `yarn dev` to prepare for the Shoppies
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## The Challenge
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+This repo contains my code for the [Shopify 2021 front-end developer internship](https://jobs.smartrecruiters.com/ni/Shopify/ee14b4f1-62ec-4a47-850b-2311c57f855b-front-end-developer-intern-remote-summer-2021).
 
-## Learn More
+It's a small app built with [Next.js](https://nextjs.org/) and [OMDB](https://www.omdbapi.com).
 
-To learn more about Next.js, take a look at the following resources:
+I chose [Next.js](https://nextjs.org/) because I like using React. [Next.js](https://nextjs.org/) makes it easy to get moving fast while providing a boatload of benefits. I try to spend my time where it'll have the most impact and [Next.js](https://nextjs.org/) helps with that.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Any styling super powers I have are thanks to [Tailwind CSS](https://tailwindcss.com/). I love it, I bet you would too.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## The Developer
 
-## Deploy on Vercel
+My name is Anthony Morris.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+I'm an ex-software engineer turned computer science student. I'm doing things a little backwards, but hey, we're all on our own unique journeys, right?
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Curious to see more of what I've done? [Visit me at my digital garden](https://anthonymorris.dev)!
