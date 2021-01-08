@@ -10,6 +10,7 @@ const NominationsStateContext = createContext({
 
 export function NominationsProvider({ children }) {
   const [nominations, setNomintations] = useState([])
+  const [nominationsQueue, setNominationsQueue] = useState([])
 
   // Load nominations from local storage if they exist
   useEffect(() => {
@@ -22,13 +23,28 @@ export function NominationsProvider({ children }) {
     }
   }, [])
 
+  useEffect(() => {
+    const queue = [...nominationsQueue]
+    const movieToFetch = queue.shift()
+
+    if (movieToFetch) {
+      fetch(`/api/movie?id=${movieToFetch.imdbID}`)
+        .then((res) => res.json())
+        .then((movie) => {
+          console.log(movie)
+          const newNominations = [...nominations, movie]
+          storeNominations(newNominations)
+          setNomintations(newNominations)
+          setNominationsQueue(queue)
+        })
+    }
+  }, [nominationsQueue.length])
+
   const storeNominations = (nominations) =>
     localStorage.setItem('nominations', JSON.stringify(nominations))
 
   const handleNominateMovie = (movie) => {
-    const newNominations = [...nominations, movie]
-    storeNominations(newNominations)
-    setNomintations(newNominations)
+    setNominationsQueue([...nominationsQueue, movie])
   }
 
   const handleRemoveNomination = (movie) => {

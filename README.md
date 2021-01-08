@@ -1,6 +1,6 @@
 # 2021 Shopify Front-end Challenge
 
-![Demo of my Shopify front-end challenge](https://user-images.githubusercontent.com/16005567/103949338-f69fb680-50ef-11eb-96f3-62d7443794e8.gif)
+![Demo of my Shopify front-end challenge](https://user-images.githubusercontent.com/16005567/103963231-9586db80-510d-11eb-8e7e-6985ddb4f2d2.gif)
 
 ## Features
 
@@ -9,6 +9,7 @@
 - Add movies to your nominations list (stored in local storage)
 - Loading and empty states (including some gifs)
 - Dynamic banner to hype you up for the Shoppies
+- Display metascore for your nominations
 
 ## Get It Running
 

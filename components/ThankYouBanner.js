@@ -44,7 +44,7 @@ export default function ThankYouBanner() {
   }, [])
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-4 lg:gap-4">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-4 lg:gap-8">
       <img
         className="rounded col-span-1 w-full"
         src="https://media.giphy.com/media/4JXNjv3MR21YXfsaqQ/giphy.gif"
