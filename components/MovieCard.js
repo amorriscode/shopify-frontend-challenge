@@ -7,7 +7,7 @@ export default function MovieCard({ movie, action }) {
 
   const hasMoviePoster = movie.Poster !== 'N/A'
   const backgroundImage = hasMoviePoster ? `url(${movie.Poster})` : 'none'
-  console.log(movie)
+
   return (
     <div className="flex items-center ">
       <div
@@ -16,9 +16,14 @@ export default function MovieCard({ movie, action }) {
         onMouseEnter={() => setDisplayMetascore(true)}
         onMouseLeave={() => setDisplayMetascore(false)}
       >
-        {!hasMoviePoster && <>🍿</>}
+        {!hasMoviePoster && (
+          <div className="w-full h-full bg-brand-red rounded flex justify-center items-center text-5xl">
+            🍿
+          </div>
+        )}
+
         {displayMetascore && movie.Metascore && (
-          <div className="w-full h-full bg-brand-red rounded flex flex-col justify-center items-center bg-opacity-75">
+          <div className="absolute top-0 bottom-0 left-0 right-0 bg-brand-red rounded flex flex-col justify-center items-center bg-opacity-75">
             <div className="font-extrabold text-5xl">{movie.Metascore}</div>
             <div className="font-bold uppercase text-xs">Metascore</div>
           </div>
@@ -31,13 +36,17 @@ export default function MovieCard({ movie, action }) {
             {movie.Title} ({movie.Year})
           </div>
 
-          {movie.Plot && <div className="text-xs mb-2">{movie.Plot}</div>}
+          {movie.Plot && movie.Plot !== 'N/A' && (
+            <div className="text-xs mb-2">{movie.Plot}</div>
+          )}
 
-          <div className="space-x-2 hidden md:block">
-            {movie.Genre.split(',').map((genre) => (
-              <GenrePill key={genre} genre={genre} />
-            ))}
-          </div>
+          {movie.Genre && (
+            <div className="space-x-2 hidden md:block">
+              {movie.Genre.split(',').map((genre) => (
+                <GenrePill key={genre} genre={genre} />
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="ml-4 mt-2">{action}</div>
