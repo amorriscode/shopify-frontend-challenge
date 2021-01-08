@@ -14,16 +14,21 @@ export default function Home() {
         />
       </Head>
 
-      <main className="container mx-auto space-y-8 p-8">
-        <h1 className="text-brand-red text-6xl font-bold text-center">
-          The Shoppies 🍿
-        </h1>
+      <main className="container mx-auto p-8">
+        <img src="/shoppies.svg" className="mx-auto mb-8" />
 
-        <h2 className="text-white text-2xl font-bold text-center">
-          Nominate your favourite movies!
+        <h2 className="text-white text-2xl font-bold text-center mb-2">
+          The movie awards made for entrepreneurs.
         </h2>
 
-        <MovieSearch />
+        <p className="text-white text-center mb-8">
+          Search for your favourite movies and nominate them to take home the
+          big prize on awards night!
+        </p>
+
+        <div className="space-y-8">
+          <MovieSearch />
+        </div>
       </main>
 
       <Nominations />
