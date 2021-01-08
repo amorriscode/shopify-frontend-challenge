@@ -34,7 +34,7 @@ export default function Nominations() {
     <>
       {displayNominations && (
         <div
-          className="rounded bg-white p-8 fixed bottom-0 right-0 mb-28 mr-4 z-30 shadow-lg overflow-y-scroll"
+          className="rounded bg-white p-8 fixed bottom-0 right-0 mb-28 mr-4 z-30 shadow-lg overflow-y-scroll ml-4 lg:w-2/3 xl:w-2/5"
           style={{ maxHeight: '80vh' }}
           ref={nominationsRef}
         >

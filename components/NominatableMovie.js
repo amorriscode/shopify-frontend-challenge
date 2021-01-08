@@ -2,8 +2,6 @@ import { useState } from 'react'
 
 import { useNominationsState } from '../context/NominationsContext'
 
-import Button from './Button'
-
 export default function NominatedMovie({ movie, onNominateMovie }) {
   const [isHovering, setIsHovering] = useState(false)
   const { nominations, handleNominateMovie } = useNominationsState()
