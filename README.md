@@ -9,6 +9,7 @@
 - Add movies to your nominations list (stored in local storage)
 - Loading and empty states (including some gifs)
 - Dynamic banner to hype you up for the Shoppies
+- Display metascore for your nominations
 
 ## Get It Running
 
